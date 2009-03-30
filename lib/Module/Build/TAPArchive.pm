@@ -4,7 +4,7 @@ use strict;
 use base 'Module::Build';
 use TAP::Harness::Archive;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 __PACKAGE__->add_property(archive_file => 'test_archive.tar.gz');
 
 =head1 NAME
@@ -54,7 +54,7 @@ sub ACTION_test_archive {
         my ($self, $tests) = @_;
         TAP::Harness::Archive->new(
             {
-                lib       => [@Module::Build::INC],
+                lib       => \@INC,
                 verbosity => $self->{properties}{verbose},
                 switches  => [$self->harness_switches],
                 archive   => $self->{properties}{archive_file} || 'test_archive.tar.gz',
